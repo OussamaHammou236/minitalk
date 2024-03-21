@@ -1,16 +1,18 @@
 CC= cc
-CFLAGS= -Wall -Wextra -Werror
+#CFLAGS= -Wall -Wextra -Werror
 NAME= server
 NAME1= client
-OBJ= server.c
+OBJ= server.c ft_bzero.c
 OBJ1= client.c ft_atoi.c
 OBJ_O= $(OBJ:.c=.o)
 OBJ1_O= $(OBJ1:.c=.o)
 
-all: $(NAME)
+all: $(NAME) $(NAME1)
 
-$(NAME): $(OBJ_O) $(OBJ1_O)
+$(NAME): $(OBJ_O)
 	$(CC) $(CFLAGS) $(OBJ_O) -o $(NAME)
+
+$(NAME1): $(OBJ1_O)
 	$(CC) $(CFLAGS) $(OBJ1_O) -o $(NAME1)
 
 clean:
@@ -19,3 +21,9 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME1) $(NAME)
+
+re: fclean all
+
+.PHONY: clean
+
+.SECONDARY: $(OBJ_O) $(OBJ1_O)

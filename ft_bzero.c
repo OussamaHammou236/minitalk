@@ -1,49 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 21:53:47 by ohammou-          #+#    #+#             */
-/*   Updated: 2024/03/15 14:35:12 by ohammou-         ###   ########.fr       */
+/*   Created: 2023/10/31 20:44:04 by ohammou-          #+#    #+#             */
+/*   Updated: 2023/11/21 11:48:34 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mintalk.h"
 
-
-void ft_Decimal_to_Binary(int c, int pid)
+void	ft_bzero(void *s, size_t n)
 {
-	int i;
-
-	i	=	0;
-	while(i < 8)
-	{
-		if(c & 1)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		c = c>>1;
-		i++;
-		usleep(50);
-	}
-}
-int main(int ac, char **av)
-{
-	int pid;
-	int i;
-
-	i = 0;
-	if (ac < 3)
-		return 0;
-	pid = ft_atoi(av[1]);
-
-	while(av[2][i])
-	{
-		ft_Decimal_to_Binary(av[2][i],pid);
-		printf("av[2][%d]=%c\n",i,av[2][i]);
-		i++;
-	}
-	return 0;
+	while (n--)
+		((unsigned char *)s)[n] = '\0';
 }

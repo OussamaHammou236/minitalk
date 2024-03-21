@@ -12,15 +12,23 @@
 
 #include "mintalk.h"
 
-
+t_data data;
 
 void test(int signo)
 {
 	if(signo == SIGUSR1)
-		printf("1");
-	if(signo == SIGUSR2)
-		printf("0");
-	printf("\n");
+		data.str[data.i] = '1';
+	else if(signo == SIGUSR2)
+		data.str[data.i] = '0';
+	data.i++;
+	if(data.i == 8)
+	{
+		data.str[data.i] = '\0';
+		printf("%s\n", data.str);
+		ft_bzero(data.str, data.i);
+		data.i = 0;
+		return ;
+	}
 }
 int main()
 {
@@ -31,6 +39,8 @@ int main()
 	psa.sa_flags = 0;
 	i = getpid();
 	printf("%d\n", i);
+	data.i = 0;
+	data.str = malloc(9);
 	while(1)
 	{
 		sigaction(SIGUSR1, &psa, NULL);

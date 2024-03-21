@@ -16,7 +16,17 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <signal.h>
+#include <stdlib.h>
 
 int	ft_atoi(const char *str);
+void	ft_bzero(void *s, size_t n);
+
+typedef struct s_data
+{
+    int i;
+    char *str;
+
+}       t_data;
+
 
 #endif

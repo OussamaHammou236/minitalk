@@ -28,14 +28,6 @@ int os(int nb, int n)
 	return c;
 }
 
-void Binary_to_Decimal()
-{
-	int c;
-	int i;
-
-	i = 0;
-	c = 0;
-}
 void test(int signo)
 {
 	if(signo == SIGUSR1)

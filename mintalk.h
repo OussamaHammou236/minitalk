@@ -25,6 +25,7 @@ typedef struct s_data
 {
     int i;
     char *str;
+    int c;
 
 }       t_data;
 

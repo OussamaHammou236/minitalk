@@ -14,21 +14,45 @@
 
 t_data data;
 
+int os(int nb, int n)
+{
+	int c;
+
+	c = 1;
+	while(n > 0)
+	{
+		c *= nb;
+		n--;
+	}
+
+	return c;
+}
+
+void Binary_to_Decimal()
+{
+	int c;
+	int i;
+
+	i = 0;
+	c = 0;
+}
 void test(int signo)
 {
 	if(signo == SIGUSR1)
+	{
 		data.str[data.i] = '1';
+		data.c += os(2, 7 - data.i);
+	}
 	else if(signo == SIGUSR2)
 		data.str[data.i] = '0';
-	data.i++;
-	if(data.i == 8)
+	if(data.i == 0)
 	{
-		data.str[data.i] = '\0';
-		printf("%s\n", data.str);
-		ft_bzero(data.str, data.i);
-		data.i = 0;
+		write(1,&data.c,1);
+		data.c = 0;
+		data.i = 7;
 		return ;
 	}
+	data.i--;
 }
 int main()
 {
@@ -39,8 +63,10 @@ int main()
 	psa.sa_flags = 0;
 	i = getpid();
 	printf("%d\n", i);
-	data.i = 0;
 	data.str = malloc(9);
+	data.i = 7;
+	data.str[8] = '\0';
+	data.c = 0;
 	while(1)
 	{
 		sigaction(SIGUSR1, &psa, NULL);

@@ -5,13 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 21:53:47 by ohammou-          #+#    #+#             */
-/*   Updated: 2024/03/21 23:11:53 by ohammou-         ###   ########.fr       */
+/*   Created: 2024/03/21 23:06:25 by ohammou-          #+#    #+#             */
+/*   Updated: 2024/03/21 23:12:06 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
+void handler(int sig)
+{
+	if(sig == SIGUSR1)
+	{
+		write(1,"the end\n", 8);
+		exit(0);
+	}
+}
 
 void ft_Decimal_to_Binary(int c, int pid)
 {
@@ -38,11 +46,16 @@ int main(int ac, char **av)
 	if (ac < 3)
 		return 0;
 	pid = ft_atoi(av[1]);
-
+	struct sigaction psa;
+	psa.sa_handler = handler;
+	psa.sa_flags = 0;
+	sigaction(SIGUSR1, &psa, NULL);
 	while(av[2][i])
 	{
 		ft_Decimal_to_Binary(av[2][i],pid);
 		i++;
 	}
+	ft_Decimal_to_Binary(av[2][i],pid);
+	while(1);
 	return 0;
 }

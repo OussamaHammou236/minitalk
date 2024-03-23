@@ -6,11 +6,11 @@
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:36:42 by ohammou-          #+#    #+#             */
-/*   Updated: 2024/03/14 01:09:03 by ohammou-         ###   ########.fr       */
+/*   Updated: 2024/03/21 23:18:57 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mintalk.h"
+#include "minitalk.h"
 
 int	ft_atoi(const char *str)
 {

@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   mintalk.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 20:44:04 by ohammou-          #+#    #+#             */
-/*   Updated: 2023/11/21 11:48:34 by ohammou-         ###   ########.fr       */
+/*   Created: 2024/03/13 21:52:27 by ohammou-          #+#    #+#             */
+/*   Updated: 2024/03/21 23:08:00 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mintalk.h"
+#ifndef MINTALK_H
+#define MINTALK_H
 
-void	ft_bzero(void *s, size_t n)
+#include <unistd.h>
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
+
+int	ft_atoi(const char *str);
+
+typedef struct s_data
 {
-	while (n--)
-		((unsigned char *)s)[n] = '\0';
-}
+    int i;
+    char *str;
+    int c;
+
+}       t_data;
+
+
+#endif

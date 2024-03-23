@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 21:52:07 by ohammou-          #+#    #+#             */
-/*   Updated: 2024/03/21 23:26:14 by ohammou-         ###   ########.fr       */
+/*   Created: 2024/03/21 23:12:35 by ohammou-          #+#    #+#             */
+/*   Updated: 2024/03/21 23:13:53 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
 t_data data;
 
@@ -27,8 +27,7 @@ int os(int nb, int n)
 
 	return c;
 }
-
-void test(int signo)
+void test(int signo, siginfo_t *act, void *octat)
 {
 	if(signo == SIGUSR1)
 	{
@@ -40,6 +39,8 @@ void test(int signo)
 	if(data.i == 0)
 	{
 		write(1,&data.c,1);
+		if(data.c == '\0')
+			kill(act->si_pid,SIGUSR1);
 		data.c = 0;
 		data.i = 7;
 		return ;
@@ -50,8 +51,9 @@ int main()
 {
 	int	i;
 	struct sigaction psa;
-	psa.sa_handler = test;
-	psa.sa_flags = 0;
+
+	psa.sa_flags = SA_SIGINFO;
+	psa.sa_sigaction = test;
 	i = getpid();
 	printf("%d\n", i);
 	data.str = malloc(9);

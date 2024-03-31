@@ -6,17 +6,17 @@ NAME1= client
 BNAME= server_bonus
 BNAME1= client_bonus
 
-OBJ= server.c
+OBJ= server.c ft_putnbr.c
 OBJ1= client.c ft_atoi.c
 
-BOBJ= bonus/server_bonus.c
+BOBJ= bonus/server_bonus.c ft_putnbr.c
 BOBJ1= bonus/client_bonus.c ft_atoi.c
 
 OBJ_O= $(OBJ:.c=.o)
 OBJ1_O= $(OBJ1:.c=.o)
 
-BOBJ_O= $(OBJ:.c=.o)
-BOBJ1_O= $(OBJ1:.c=.o)
+BOBJ_O= $(BOBJ:.c=.o)
+BOBJ1_O= $(BOBJ1:.c=.o)
 
 all: $(NAME) $(NAME1)
 
@@ -42,6 +42,8 @@ fclean: clean
 	rm -rf $(NAME1) $(NAME) $(BNAME1) $(BNAME)
 
 re: fclean all
+
+Bre: fclean bonus
 
 .PHONY: clean
 

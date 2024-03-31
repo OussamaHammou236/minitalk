@@ -1,47 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohammou- <ohammou-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 21:53:47 by ohammou-          #+#    #+#             */
-/*   Updated: 2024/03/31 00:04:31 by ohammou-         ###   ########.fr       */
+/*   Created: 2024/03/30 23:48:30 by ohammou-          #+#    #+#             */
+/*   Updated: 2024/03/30 23:58:51 by ohammou-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_decimal_to_binary(int c, int pid)
+void	ft_putchar_fd(char c, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		if (c & 1)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		c = c >> 1;
-		i++;
-		usleep(50);
-	}
+	write(fd, &c, 1);
 }
 
-int	main(int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	pid;
-	int	i;
+	int			i;
+	long int	l;
 
 	i = 0;
-	if (ac != 3)
-		return (0);
-	pid = ft_atoi(av[1]);
-	while (av[2][i])
+	l = n;
+	if (fd < 0)
+		return ;
+	if (l < 0)
 	{
-		ft_decimal_to_binary(av[2][i], pid);
-		i++;
+		write(fd, "-", 1);
+		l *= -1;
 	}
-	return (0);
+	if (l >= 10)
+	{
+		ft_putnbr_fd(l / 10, fd);
+		ft_putchar_fd(l % 10 + '0', fd);
+	}
+	if (l >= 0 && l < 10)
+		ft_putchar_fd(l + '0', fd);
 }
